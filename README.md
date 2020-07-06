@@ -1,10 +1,14 @@
-# card-transactions-publisher
+# mock-faa-swim-feeds
 
-Node.js application that uses kafka-node to publish credit card transactions to Kafka.
+Available mock FAA SWIM feeds:
+
+- Flight Data Position Systems (FDPS) position feed
 
 ## Getting started
 
-cd to this `card-transactions-publisher` directory and then run:
+Open [.EDIT-ME.env](./src/.EDIT-ME.env) and fill in your event broker's connection details, then rename the file to `.env`
+
+From a terminal, cd to this repo `mock-faa-swim-feeds` and run:
 
 ```sh
 npm i
