@@ -204,8 +204,6 @@ export function createMqttClient({
             reject();
           }
           // no error indicates broker has received message and successfully sent back an ack
-          logInfo(`Published message on topic ${topic}`);
-          console.dir(message);
           resolve();
         }
       );
@@ -244,9 +242,7 @@ export function createMqttClient({
         subscriptions = produce(subscriptions, (draft) => {
           draft[topic] = handler;
         });
-        console.log(
-          `Suback received for topic "${granted[0].topic}" using QOS ${granted[0].qos}`
-        );
+        console.log(`Suback received for topic "${granted[0].topic}" using QOS ${granted[0].qos}`);
         resolve();
       });
     });
@@ -369,9 +365,7 @@ export function convertMqttTopicFilterToRegex(topicFilter) {
   let topicFilterRegex = topicFilter.replace(/\+/g, ".*").replace(/\$/g, ".*");
   // convert multi-level wildcard # to .* if it is in a valid position in the topic filter
   if (topicFilter.lastIndexOf("#") == topicFilter.length - 1) {
-    topicFilterRegex = topicFilterRegex
-      .substring(0, topicFilterRegex.length - 1)
-      .concat(".*");
+    topicFilterRegex = topicFilterRegex.substring(0, topicFilterRegex.length - 1).concat(".*");
   }
   // Note: if you need system level topics, you may need to convert system symbol $ to .
   // This is Solace specific so I'm not going to include it.

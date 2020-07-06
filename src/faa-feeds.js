@@ -14,8 +14,9 @@ export function createFdpsPositionFeedSource(publish) {
   function start() {
     setInterval(() => {
       let mockFdpsPositionTick = createMockFdpsPositionTick();
+      // 5 publishes
       publish(createFdpsPositionTopic(mockFdpsPositionTick), mockFdpsPositionTick, { qos: 0 });
-    }, 60); // 100 messages / second
+    }, 1); // 1000 invocations / second
   }
 
   function stop() {
@@ -67,7 +68,6 @@ function createMockFdpsPositionTick() {
 }
 
 function createFdpsPositionTopic(fdpsPositionTick) {
-  console.log(typeof fdpsPositionTick.lat);
   return `${fdpsPositionTick.root}/${fdpsPositionTick.feed}/${fdpsPositionTick.identifier}/${fdpsPositionTick.fdpsFlightStatus}/${fdpsPositionTick.aircraftIdentifier}/${fdpsPositionTick.lat}/${fdpsPositionTick.lon}/${fdpsPositionTick.actualSpeed}/${fdpsPositionTick.altitude}/${fdpsPositionTick.trackVelocityX}/${fdpsPositionTick.trackVelocityY}`;
 }
 
